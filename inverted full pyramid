@@ -1,0 +1,17 @@
+public class InvertedFullPyramid {
+    public static void main(String[] args) {
+        int numberOfRows = 5;
+        printInvertedPyramidPattern(numberOfRows);
+    }
+    public static void printInvertedPyramidPattern(int numberOfRows) {
+        for (int i = numberOfRows; i >= 1; i--) {
+            for (int j = 0; j < numberOfRows - i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 0; k < 2 * i - 1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
