@@ -1,0 +1,11 @@
+def decimal_to_binary_reverse(n):
+    binary = bin(n).replace("0b", "")
+    reversed_binary = binary[::-1]
+    return reversed_binary
+
+# Get input from the user
+number = int(input("Enter a decimal number: "))
+reversed_binary = decimal_to_binary_reverse(number)
+
+print(f"Binary of {number}: {bin(number).replace('0b', '')}")
+print(f"Reversed binary: {reversed_binary}")
