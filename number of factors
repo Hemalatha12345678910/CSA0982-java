@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class NumberOfFactors {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter a number to find its factors: ");
+        int number = scanner.nextInt();
+        
+        int factorCount = countFactors(number);
+        System.out.println("The number of factors of " + number + " is: " + factorCount);
+    }
+    
+    // Method to count the number of factors of a number
+    public static int countFactors(int num) {
+        int count = 0;
+        for (int i = 1; i <= num; i++) {
+            if (num % i == 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
