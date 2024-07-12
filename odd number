@@ -1,0 +1,18 @@
+import java.util.Scanner;
+public class FindOddNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        // Prompt the user to enter a value for n
+        System.out.print("Enter the value of n: ");
+        int n = scanner.nextInt();
+        // Calculate the nth odd number
+        int nthOddNumber = 2 * n - 1;
+        // Calculate the nth odd number after the nth odd number
+        int nthOddAfterNthOdd = nthOddNumber + 2 * n;
+        // Display the results
+        System.out.println("The " + n + "th odd number is: " + nthOddNumber);
+        System.out.println("The " + n + "th odd number after the " + n + "th odd number is: " + nthOddAfterNthOdd);
+        // Close the scanner
+        scanner.close();
+    }
+}
