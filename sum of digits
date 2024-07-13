@@ -1,0 +1,25 @@
+import java.util.Scanner;
+public class SumOfDigits {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+        int result = sumDigitsToSingleDigit(number);
+        System.out.println("The single digit sum is: " + result);
+        scanner.close();
+    }
+    public static int sumDigitsToSingleDigit(int num) {
+        while (num >= 10) {
+            num = sumDigits(num);
+        }
+        return num;
+    }
+    public static int sumDigits(int num) {
+        int sum = 0;
+        while (num != 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+        return sum;
+    }
+}
