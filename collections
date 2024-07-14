@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+public class Sorter<T extends Comparable<T>> {
+    private List<T> elements;
+    public Sorter() {
+        elements = new ArrayList<>();
+    }
+
+    public void addElement(T element) {
+        elements.add(element);
+    }
+
+    public void sortElements() {
+        Collections.sort(elements);
+    }
+
+    public void printElements() {
+        for (T element : elements) {
+            System.out.println(element);
+        }
+    }
+
+    public static void main(String[] args) {
+        // Example with Integer
+        Sorter<Integer> intSorter = new Sorter<>();
+        intSorter.addElement(5);
+        intSorter.addElement(3);
+        intSorter.addElement(8);
+        intSorter.addElement(1);
+        System.out.println("Before sorting integers:");
+        intSorter.printElements();
+        intSorter.sortElements();
+        System.out.println("After sorting integers:");
+        intSorter.printElements();
+
+        // Example with String
+        Sorter<String> stringSorter = new Sorter<>();
+        stringSorter.addElement("Banana");
+        stringSorter.addElement("Apple");
+        stringSorter.addElement("Orange");
+        stringSorter.addElement("Mango");
+        System.out.println("\nBefore sorting strings:");
+        stringSorter.printElements();
+        stringSorter.sortElements();
+        System.out.println("After sorting strings:");
+        stringSorter.printElements();
+    }
+}
