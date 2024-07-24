@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class AverageCalculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int positiveSum = 0, negativeSum = 0;
+        int positiveCount = 0, negativeCount = 0;
+
+        System.out.println("Enter numbers (enter -1 to stop):");
+
+        while (true) {
+            int num = scanner.nextInt();
+
+            if (num == -1) {
+                break;
+            }
+
+            if (num > 0) {
+                positiveSum += num;
+                positiveCount++;
+            } else if (num < 0) {
+                negativeSum += num;
+                negativeCount++;
+            }
+        }
+
+        if (positiveCount > 0) {
+            double positiveAverage = (double) positiveSum / positiveCount;
+            System.out.println("Average of positive numbers: " + positiveAverage);
+        } else {
+            System.out.println("No positive numbers entered.");
+        }
+
+        if (negativeCount > 0) {
+            double negativeAverage = (double) negativeSum / negativeCount;
+            System.out.println("Average of negative numbers: " + negativeAverage);
+        } else {
+            System.out.println("No negative numbers entered.");
+        }
+
+        scanner.close();
+    }
+}
