@@ -1,0 +1,35 @@
+import java.util.Scanner;
+public class SumArrayWithException {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input number of elements
+        System.out.print("Enter the number of elements in the array: ");
+        int n = scanner.nextInt();
+
+        // Initialize the array with size n
+        int[] numbers = new int[n];
+
+        // Input elements of the array
+        System.out.println("Enter " + n + " numbers:");
+        for (int i = 0; i < n; i++) {
+            numbers[i] = scanner.nextInt();
+        }
+
+        // Calculate sum of the array elements
+        int sum = 0;
+        try {
+            for (int i = 0; i <= n; i++) { // Note the condition i <= n to simulate ArrayIndexOutOfBoundsException
+                sum += numbers[i];
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBoundsException caught: " + e.getMessage());
+            // Print current state of sum
+            System.out.println("Current sum before exception: " + sum);
+        }
+
+        // Print the final result (sum may not be accurate if exception was thrown)
+        System.out.println("Final sum: " + sum);
+    }
+}
