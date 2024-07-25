@@ -1,0 +1,44 @@
+// Abstract class for Bank
+abstract class Bank {
+    // Abstract method to get the rate of interest
+    abstract double getRateOfInterest();
+}
+
+// Concrete class for SBI Bank
+class SBI extends Bank {
+    @Override
+    double getRateOfInterest() {
+        return 8.4;
+    }
+}
+
+// Concrete class for ICICI Bank
+class ICICI extends Bank {
+    @Override
+    double getRateOfInterest() {
+        return 7.3;
+    }
+}
+
+// Concrete class for AXIS Bank
+class AXIS extends Bank {
+    @Override
+    double getRateOfInterest() {
+        return 9.7;
+    }
+}
+
+// Main class to test the Bank implementations
+public class Main {
+    public static void main(String[] args) {
+        // Create instances of different banks
+        Bank sbi = new SBI();
+        Bank icici = new ICICI();
+        Bank axis = new AXIS();
+        
+        // Display the rate of interest for each bank
+        System.out.println("SBI Bank Rate of Interest: " + sbi.getRateOfInterest() + "%");
+        System.out.println("ICICI Bank Rate of Interest: " + icici.getRateOfInterest() + "%");
+        System.out.println("AXIS Bank Rate of Interest: " + axis.getRateOfInterest() + "%");
+    }
+}
