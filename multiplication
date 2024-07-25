@@ -1,0 +1,53 @@
+// Thread to display multiplication table
+class MultiplicationTableThread extends Thread {
+    private int number;
+
+    // Constructor to initialize the number
+    MultiplicationTableThread(int number) {
+        this.number = number;
+    }
+
+    @Override
+    public void run() {
+        // Display the multiplication table
+        for (int i = 1; i <= 10; i++) {
+            try {
+                // Simulate processing time
+                Thread.sleep(500);
+                System.out.println(number + " x " + i + " = " + (number * i));
+            } catch (InterruptedException e) {
+                System.out.println("Thread interrupted.");
+            }
+        }
+    }
+}
+
+public class MultiplicationTableDemo {
+    public static void main(String[] args) {
+        // Create two threads for multiplication tables of 5 and 10
+        MultiplicationTableThread tableFor5 = new MultiplicationTableThread(5);
+        MultiplicationTableThread tableFor10 = new MultiplicationTableThread(10);
+
+        // Display thread states before starting
+        System.out.println("Thread states before starting:");
+        System.out.println("Thread for 5: " + tableFor5.getState());
+        System.out.println("Thread for 10: " + tableFor10.getState());
+
+        // Start the threads
+        tableFor5.start();
+        tableFor10.start();
+
+        // Wait for threads to complete
+        try {
+            tableFor5.join();
+            tableFor10.join();
+        } catch (InterruptedException e) {
+            System.out.println("Main thread interrupted.");
+        }
+
+        // Display thread states after completion
+        System.out.println("\nThread states after completion:");
+        System.out.println("Thread for 5: " + tableFor5.getState());
+        System.out.println("Thread for 10: " + tableFor10.getState());
+    }
+}
