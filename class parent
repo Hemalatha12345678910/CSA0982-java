@@ -1,0 +1,47 @@
+// Superclass
+class Parent {
+    int value;
+    
+    // Parameterized constructor
+    Parent(int value) {
+        this.value = value;
+    }
+    
+    // Method to display the value
+    void display() {
+        System.out.println("Parent value: " + value);
+    }
+}
+
+// Subclass
+class Child extends Parent {
+    // Hiding the member variable of the superclass
+    int value;
+    
+    // Parameterized constructor
+    Child(int parentValue, int childValue) {
+        // Calling the parameterized constructor of the superclass
+        super(parentValue);
+        this.value = childValue;
+    }
+    
+    // Method to display both parent and child values
+    @Override
+    void display() {
+        // Display the value from the superclass
+        System.out.println("Parent value from Child: " + super.value);
+        // Display the value from the subclass
+        System.out.println("Child value: " + value);
+    }
+}
+
+// Main class to test the functionality
+public class Main {
+    public static void main(String[] args) {
+        // Creating an instance of Child
+        Child child = new Child(100, 200);
+        
+        // Displaying the values
+        child.display();
+    }
+}
