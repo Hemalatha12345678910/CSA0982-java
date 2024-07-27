@@ -1,0 +1,20 @@
+public class MultiCatchExample {
+    public static void main(String[] args) {
+        // Test cases to trigger different exceptions
+        int[] numbers = {1, 2, 3};
+        Integer divisor = null;
+        
+        try {
+            // ArithmeticException: divide by zero
+            int result = 10 / 0;
+            
+            // ArrayIndexOutOfBoundsException: index out of bounds
+            int number = numbers[5];
+            
+            // NullPointerException: invoking method on a null object
+            int length = divisor.toString().length();
+        } catch (ArithmeticException | ArrayIndexOutOfBoundsException | NullPointerException e) {
+            System.out.println("Exception caught: " + e.getClass().getName() + " - " + e.getMessage());
+        }
+    }
+}
