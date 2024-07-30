@@ -1,0 +1,30 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class FileReaderWriterExample {
+    public static void main(String[] args) {
+        // Define the source and destination file paths
+        String sourceFile = "source.txt";
+        String destinationFile = "destination.txt";
+
+        // Read from source file and write to destination file
+        try (FileReader fileReader = new FileReader(sourceFile);
+             FileWriter fileWriter = new FileWriter(destinationFile)) {
+
+            char[] buffer = new char[1024];
+            int charsRead;
+
+            // Read data from source file and write to destination file
+            while ((charsRead = fileReader.read(buffer)) != -1) {
+                fileWriter.write(buffer, 0, charsRead);
+            }
+
+            System.out.println("File copied successfully.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("An error occurred while copying the file.");
+        }
+    }
+}
