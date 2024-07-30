@@ -1,0 +1,91 @@
+import java.util.*;
+
+public class ExamRoom {
+    private int n;
+    private TreeSet<int[]> seats; // To store intervals with students
+
+    // Constructor
+    public ExamRoom(int n) {
+        this.n = n;
+        seats = new TreeSet<>((a, b) -> {
+            // Prioritize longer intervals first
+            int lengthComparison = Integer.compare(b[1] - b[0], a[1] - a[0]);
+            // For intervals of the same length, prioritize smaller starting index
+            if (lengthComparison == 0) {
+                return Integer.compare(a[0], b[0]);
+            }
+            return lengthComparison;
+        });
+        // Initial interval representing the entire row
+        seats.add(new int[]{-1, n});
+    }
+
+    // Method to find the seat with the maximum distance to the closest person
+    public int seat() {
+        // Get the largest interval
+        int[] interval = seats.pollFirst();
+        int left = interval[0];
+        int right = interval[1];
+        int seat;
+
+        // Determine the seat to occupy
+        if (left == -1) {
+            seat = 0;
+        } else if (right == n) {
+            seat = n - 1;
+        } else {
+            seat = (left + right) / 2;
+        }
+
+        // Add new intervals
+        if (seat > left) {
+            seats.add(new int[]{left, seat});
+        }
+        if (seat < right - 1) {
+            seats.add(new int[]{seat + 1, right});
+        }
+
+        return seat;
+    }
+
+    // Method to handle a student leaving a seat
+    public void leave(int p) {
+        // Find and remove the interval containing seat p
+        int[] leftInterval = null;
+        int[] rightInterval = null;
+
+        for (int[] interval : seats) {
+            if (interval[1] == p) {
+                leftInterval = interval;
+            }
+            if (interval[0] == p + 1) {
+                rightInterval = interval;
+            }
+            if (leftInterval != null && rightInterval != null) {
+                break;
+            }
+        }
+
+        seats.remove(leftInterval);
+        seats.remove(rightInterval);
+
+        // Merge intervals if necessary
+        if (leftInterval != null && rightInterval != null) {
+            seats.add(new int[]{leftInterval[0], rightInterval[1]});
+        } else if (leftInterval != null) {
+            seats.add(new int[]{leftInterval[0], p + 1});
+        } else if (rightInterval != null) {
+            seats.add(new int[]{p, rightInterval[1]});
+        }
+    }
+
+    public static void main(String[] args) {
+        // Example usage
+        ExamRoom examRoom = new ExamRoom(10);
+        System.out.println(examRoom.seat()); // Example output: 0
+        System.out.println(examRoom.seat()); // Example output: 9
+        System.out.println(examRoom.seat()); // Example output: 4
+        examRoom.leave(4);
+        System.out.println(examRoom.seat()); // Example output after a seat is freed
+    }
+}
