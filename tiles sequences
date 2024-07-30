@@ -1,0 +1,36 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class TileSequences {
+
+    public static void main(String[] args) {
+        char[] tiles = {'A', 'A', 'B', 'C'};
+        System.out.println("Number of possible sequences: " + numTilePossibilities(tiles));
+    }
+
+    public static int numTilePossibilities(char[] tiles) {
+        Set<String> sequences = new HashSet<>();
+        boolean[] used = new boolean[tiles.length];
+        backtrack(tiles, used, "", sequences);
+        return sequences.size();
+    }
+
+    private static void backtrack(char[] tiles, boolean[] used, String current, Set<String> sequences) {
+        // If current sequence is not empty, add it to the set of sequences
+        if (!current.isEmpty()) {
+            sequences.add(current);
+        }
+
+        for (int i = 0; i < tiles.length; i++) {
+            if (used[i]) continue; // Skip already used tiles
+            // Avoid using the same character in the same position
+            if (i > 0 && tiles[i] == tiles[i - 1] && !used[i - 1]) continue;
+
+            // Mark the tile as used and add it to the current sequence
+            used[i] = true;
+            backtrack(tiles, used, current + tiles[i], sequences);
+            // Backtrack: unmark the tile and try the next
+            used[i] = false;
+        }
+    }
+}
