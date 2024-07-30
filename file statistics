@@ -1,0 +1,45 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileStatistics {
+
+    public static void main(String[] args) {
+        // Define the file path
+        String filePath = "source.txt";
+
+        // Initialize counters
+        int numLines = 0;
+        int numWords = 0;
+        int numCharacters = 0;
+
+        // Read from the file using BufferedReader
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            // Read lines of the file until the end is reached
+            while ((line = bufferedReader.readLine()) != null) {
+                numLines++; // Count the line
+                numCharacters += line.length(); // Count characters in the line
+                numWords += countWords(line); // Count words in the line
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("An error occurred while reading the file.");
+        }
+
+        // Output the results
+        System.out.println("Number of Lines: " + numLines);
+        System.out.println("Number of Words: " + numWords);
+        System.out.println("Number of Characters: " + numCharacters);
+    }
+
+    // Method to count words in a line
+    private static int countWords(String line) {
+        if (line.trim().isEmpty()) {
+            return 0;
+        }
+        // Split the line into words based on whitespace and return the number of words
+        String[] words = line.trim().split("\\s+");
+        return words.length;
+    }
+}
