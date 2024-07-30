@@ -1,0 +1,33 @@
+public class NumberPrinter {
+
+    public static void main(String[] args) {
+        // Create and start three threads
+        Thread thread1 = new Thread(new NumberRunnable(1));
+        Thread thread2 = new Thread(new NumberRunnable(2));
+        Thread thread3 = new Thread(new NumberRunnable(3));
+
+        thread1.start();
+        thread2.start();
+        thread3.start();
+    }
+}
+
+class NumberRunnable implements Runnable {
+    private final int start;
+
+    public NumberRunnable(int start) {
+        this.start = start;
+    }
+
+    @Override
+    public void run() {
+        for (int i = start; i <= 30; i += 3) {
+            System.out.println("Thread " + start + ": " + i);
+            try {
+                Thread.sleep(100); // Sleep for 100 milliseconds
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
