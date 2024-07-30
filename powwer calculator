@@ -1,0 +1,38 @@
+public class PowerCalculator {
+
+    public static void main(String[] args) {
+        double x = 2.0; // Example base
+        int n = 10; // Example exponent
+
+        double result = pow(x, n);
+        System.out.println(x + " raised to the power of " + n + " is " + result);
+    }
+
+    public static double pow(double x, int n) {
+        // Handle the edge case of n being negative
+        if (n < 0) {
+            x = 1 / x;
+            n = -n;
+        }
+        
+        return power(x, n);
+    }
+
+    private static double power(double x, int n) {
+        // Base case
+        if (n == 0) {
+            return 1;
+        }
+
+        // Recursive case
+        double halfPower = power(x, n / 2);
+        
+        // If n is even
+        if (n % 2 == 0) {
+            return halfPower * halfPower;
+        } else {
+            // If n is odd
+            return x * halfPower * halfPower;
+        }
+    }
+}
