@@ -1,0 +1,45 @@
+public class Singleton {
+
+    // The single instance of the class
+    private static Singleton instance = null;
+
+    // Private constructor to prevent instantiation from outside
+    private Singleton() {
+        // Throw an exception if an instance already exists
+        if (instance != null) {
+            throw new IllegalStateException("Cannot create another instance. Only one instance is allowed.");
+        }
+    }
+
+    // Method to get the single instance of the class
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+
+    public static void main(String[] args) {
+        try {
+            // Create the first instance
+            Singleton singleton1 = Singleton.getInstance();
+            System.out.println("First instance created successfully.");
+
+            // Attempt to create a second instance
+            Singleton singleton2 = Singleton.getInstance();
+            System.out.println("Second instance created successfully.");
+
+        } catch (IllegalStateException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+
+        try {
+            // Attempt to create a new instance directly (this is not allowed)
+            // Uncommenting the following lines will cause a compile-time error
+            // Singleton singletonDirect = new Singleton();
+            // System.out.println("Direct instance creation.");
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+}
