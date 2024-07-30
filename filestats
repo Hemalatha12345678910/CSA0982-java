@@ -1,0 +1,41 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
+public class FileStats {
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println("Usage: java FileStats <file-path>");
+            return;
+        }
+
+        String filePath = args[0];
+
+        try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
+            // Count lines
+            long lineCount = lines.count();
+
+            // Reopen the file to get a new stream for counting words and characters
+            try (Stream<String> linesAgain = Files.lines(Paths.get(filePath))) {
+                // Count characters and words
+                long[] stats = linesAgain
+                    .flatMap(line -> Stream.of(line.split("\\s+"))) // Split line into words
+                    .collect(() -> new long[] {0, 0}, // Initialize counts
+                             (acc, word) -> { acc[0] += word.length(); acc[1]++; }, // Update counts
+                             (acc1, acc2) -> { acc1[0] += acc2[0]; acc1[1] += acc2[1]; }); // Merge counts
+
+                long charCount = stats[0];
+                long wordCount = stats[1];
+
+                // Print results
+                System.out.println("Number of Lines: " + lineCount);
+                System.out.println("Number of Words: " + wordCount);
+                System.out.println("Number of Characters: " + charCount);
+            }
+
+        } catch (IOException e) {
+            System.err.println("An error occurred while reading the file: " + e.getMessage());
+        }
+    }
+}
