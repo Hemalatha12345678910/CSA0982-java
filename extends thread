@@ -1,0 +1,43 @@
+// Define the MyThread class that extends Thread
+class MyThread extends Thread {
+
+    // Constructor of MyThread class
+    public MyThread(String threadName) {
+        // Call the base class (Thread) constructor using super
+        super(threadName);
+        System.out.println("MyThread constructor: " + Thread.currentThread().getName());
+    }
+
+    // Override the run method to define the code executed by this thread
+    @Override
+    public void run() {
+        System.out.println("MyThread is running. Thread name: " + Thread.currentThread().getName());
+        try {
+            // Sleep for 2 seconds to simulate work
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            System.out.println("Thread was interrupted: " + e.getMessage());
+        }
+        System.out.println("MyThread finished executing. Thread name: " + Thread.currentThread().getName());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an instance of MyThread
+        MyThread myThread = new MyThread("ChildThread");
+
+        // Start the MyThread
+        myThread.start();
+
+        // Main thread's code
+        System.out.println("Main thread is running. Thread name: " + Thread.currentThread().getName());
+        try {
+            // Sleep for 1 second to simulate work
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println("Main thread was interrupted: " + e.getMessage());
+        }
+        System.out.println("Main thread finished executing. Thread name: " + Thread.currentThread().getName());
+    }
+}
