@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class ProvidentFundInterest {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        double principal = 0.0;
+        double rateOfInterest = 0.0;
+        int timePeriod = 0;
+        double interest = 0.0;
+
+        try {
+            // Input principal amount
+            System.out.print("Enter the principal amount: ");
+            principal = scanner.nextDouble();
+            
+            // Input rate of interest
+            System.out.print("Enter the rate of interest (in percentage): ");
+            rateOfInterest = scanner.nextDouble();
+            
+            // Input time period in years
+            System.out.print("Enter the time period (in years): ");
+            timePeriod = scanner.nextInt();
+
+            // Check for invalid input
+            if (principal < 0 || rateOfInterest < 0 || timePeriod < 0) {
+                throw new IllegalArgumentException("Inputs must be non-negative.");
+            }
+
+            // Calculate interest
+            interest = (principal * rateOfInterest * timePeriod) / 100;
+
+            // Display the calculated interest
+            System.out.println("The calculated interest is: " + interest);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: Division by zero is not allowed.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        } finally {
+            // Close the scanner
+            scanner.close();
+            System.out.println("Resources released.");
+        }
+    }
+}
